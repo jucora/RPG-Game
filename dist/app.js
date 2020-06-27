@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/game.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
+/***/ "./src/game.js":
+/*!*********************!*\
+  !*** ./src/game.js ***!
+  \*********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("var config = {\n  width: 800,\n  height: 480,\n  backgroundColor: 0x000000,\n  scene: [setGame, Menu, getName, Instructions, Room, Space, Scores, End],\n  pixelArt: true,\n  physics: {\n    default: \"arcade\",\n    arcade: {\n      debug: false,\n    },\n  },\n};\nlet cursors;\nlet human;\nlet game = new Phaser.Game(config);\n\n\n//# sourceURL=webpack:///./src/game.js?");
 
 /***/ })
 
