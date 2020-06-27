@@ -9,15 +9,15 @@ class setGame extends Phaser.Scene {
     this.load.image("background2", "../src/assets/images/background2.jpg");
     this.load.image("background3", "../src/assets/images/background3.jpg");
     this.load.image("background4", "../src/assets/images/background4.png");
-    this.load.image("background5", "../src/assets/images/Background-4.png");
+    this.load.image("background5", "../src/assets/images/background5.png");
   }
 
   loadSprites() {
-    this.load.spritesheet("ball", "../src/assets/images/balls.png", {
+    this.load.spritesheet("ball", "../src/assets/spritesheets/balls.png", {
       frameWidth: 128,
       frameHeight: 128,
     });
-    this.load.spritesheet("human", "../src/assets/images/human.png", {
+    this.load.spritesheet("human", "../src/assets/spritesheets/human.png", {
       frameWidth: 32,
       frameHeight: 32,
     });
