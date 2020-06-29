@@ -1,6 +1,6 @@
-/* istanbul ignore next */
 import Beam from "./beam";
 import Explosion from "./explosion";
+import create from "./create";
 
 class Space extends Phaser.Scene {
   constructor() {
@@ -8,7 +8,7 @@ class Space extends Phaser.Scene {
   }
 
   scoreGraphic() {
-    var graphics = this.add.graphics();
+    const graphics = this.add.graphics();
     graphics.fillStyle(0x000000, 1);
     graphics.beginPath();
     graphics.moveTo(0, 0);
@@ -21,9 +21,9 @@ class Space extends Phaser.Scene {
   }
 
   async addScoreToApi() {
-    var url =
+    const url =
       "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdz/scores/";
-    var data = { user: this.game.playerName, score: this.game.score };
+    const data = { user: this.game.playerName, score: this.game.score };
 
     fetch(url, {
       method: "POST",
@@ -37,8 +37,7 @@ class Space extends Phaser.Scene {
       .then((response) => console.log("Success:", response));
   }
 
-  pickPowerUp(player, powerUp) {
-    this.collect -= 1;
+  collectionControl() {
     if (this.collect < 0) {
       this.music.pause(this.musicConfig);
       this.game.completed += 1;
@@ -51,22 +50,27 @@ class Space extends Phaser.Scene {
         this.scene.start("room");
       }
     }
+  }
+
+  pickPowerUp(player, powerUp) {
+    this.collect -= 1;
+    this.collectionControl();
     powerUp.disableBody(true, true);
     this.pickupSound.play();
   }
 
   resetPlayer() {
-    var x = this.game.config.width / 2 - 8;
-    var y = this.game.config.height + 64;
+    const x = this.game.config.width / 2 - 8;
+    const y = this.game.config.height + 64;
     this.player.enableBody(true, x, y, true, true);
     this.player.alpha = 0.5;
-    var tween = this.tweens.add({
+    const tween = this.tweens.add({
       targets: this.player,
       y: this.game.config.height - 64,
       ease: "Power1",
       duration: 1500,
       repeat: false,
-      onComplete: function () {
+      onComplete() {
         this.player.alpha = 1;
       },
       callbackScope: this,
@@ -75,25 +79,11 @@ class Space extends Phaser.Scene {
 
   resetShipPos(virus) {
     virus.y = 0;
-    var randomX = Phaser.Math.Between(0, this.game.config.width);
+    const randomX = Phaser.Math.Between(0, this.game.config.width);
     virus.x = randomX;
   }
 
-  hurtPlayer(player, enemy) {
-    this.resetShipPos(enemy);
-    if (this.player.alpha < 1) {
-      return;
-    }
-    var explosion = new Explosion(this, player.x, player.y);
-    player.disableBody(true, true);
-    this.explosionSound.play();
-    this.time.addEvent({
-      delay: 1000,
-      callback: this.resetPlayer,
-      callbackScope: this,
-      loop: false,
-    });
-    this.lifes -= 1;
+  lifeControl() {
     if (this.lifes === 0) {
       this.game.score = 0;
       this.music.pause(this.musicConfig);
@@ -102,31 +92,61 @@ class Space extends Phaser.Scene {
     }
   }
 
+  firstPlayerState() {
+    this.player.disableBody(true, true);
+    this.time.addEvent({
+      delay: 1000,
+      callback: this.resetPlayer,
+      callbackScope: this,
+      loop: false,
+    });
+  }
+
+  hurtPlayer(player, enemy) {
+    this.resetShipPos(enemy);
+    if (this.player.alpha < 1) {
+      return;
+    }
+    new Explosion(this, player.x, player.y);
+    this.explosionSound.play();
+    this.firstPlayerState();
+    this.lifes -= 1;
+    this.lifeControl();
+  }
+
   zeroPad(number, size) {
-    var stringNumber = String(number);
+    let stringNumber = String(number);
     while (stringNumber.length < (size || 2)) {
-      stringNumber = "0" + stringNumber;
+      stringNumber = `0${stringNumber}`;
     }
     return stringNumber;
   }
 
+  incrementScore() {
+    this.game.score += 15;
+    this.scoreLabel.text = `SCORE ${this.zeroPad(this.game.score, 6)}`;
+  }
+
   hitEnemy(projectile, enemy) {
-    var explosion = new Explosion(this, enemy.x, enemy.y);
+    new Explosion(this, enemy.x, enemy.y);
     projectile.destroy();
     this.resetShipPos(enemy);
-    this.game.score += 15;
-    this.scoreLabel.text = "SCORE " + this.zeroPad(this.game.score, 6);
+    this.incrementScore();
     this.explosionSound.play();
+    this.incrementScore();
   }
 
   amountEnemies() {
     if (this.game.completed === 0) {
       return 5;
-    } else if (this.game.completed === 1) {
+    }
+    if (this.game.completed === 1) {
       return 2;
-    } else if (this.game.completed === 2) {
+    }
+    if (this.game.completed === 2) {
       return 3;
-    } else if (this.game.completed === 3) {
+    }
+    if (this.game.completed === 3) {
       return 4;
     }
   }
@@ -134,11 +154,14 @@ class Space extends Phaser.Scene {
   enemiesSpriteControl() {
     if (this.game.completed === 0) {
       return this.physics.add.sprite(16, 16, "green_virus");
-    } else if (this.game.completed === 1) {
+    }
+    if (this.game.completed === 1) {
       return this.physics.add.sprite(16, 16, "pink_virus");
-    } else if (this.game.completed === 2) {
+    }
+    if (this.game.completed === 2) {
       return this.physics.add.sprite(16, 16, "red_virus");
-    } else if (this.game.completed === 3) {
+    }
+    if (this.game.completed === 3) {
       return this.physics.add.sprite(16, 16, "pink_virus");
     }
   }
@@ -146,11 +169,14 @@ class Space extends Phaser.Scene {
   enemiesScaleControl() {
     if (this.game.completed === 0) {
       return 1;
-    } else if (this.game.completed === 1) {
+    }
+    if (this.game.completed === 1) {
       return 2;
-    } else if (this.game.completed === 2) {
+    }
+    if (this.game.completed === 2) {
       return 2;
-    } else if (this.game.completed === 3) {
+    }
+    if (this.game.completed === 3) {
       return 1;
     }
   }
@@ -158,11 +184,14 @@ class Space extends Phaser.Scene {
   virusVelocityControl() {
     if (this.game.completed === 0) {
       return [200, 200];
-    } else if (this.game.completed === 1) {
+    }
+    if (this.game.completed === 1) {
       return [250, 250];
-    } else if (this.game.completed === 2) {
+    }
+    if (this.game.completed === 2) {
       return [300, 300];
-    } else if (this.game.completed === 3) {
+    }
+    if (this.game.completed === 3) {
       return [300, 300];
     }
   }
@@ -170,7 +199,7 @@ class Space extends Phaser.Scene {
   setEnemies() {
     this.enemies = this.physics.add.group();
     this.maxVirus = this.amountEnemies();
-    for (var i = 0; i <= this.maxVirus; i++) {
+    for (let i = 0; i <= this.maxVirus; i++) {
       this.virus = this.enemiesSpriteControl();
       this.virus.setScale(this.enemiesScaleControl());
       this.virusScale;
@@ -185,8 +214,6 @@ class Space extends Phaser.Scene {
         this.virusVelocityControl()[0],
         this.virusVelocityControl()[1]
       );
-
-      //this.virus.setVelocity(200, 200); //
       this.virus.setCollideWorldBounds(true);
       this.virus.setBounce(1);
     }
@@ -195,25 +222,21 @@ class Space extends Phaser.Scene {
   backgroundLevelControl() {
     if (this.game.completed === 0) {
       return "background2";
-    } else if (this.game.completed === 1) {
+    }
+    if (this.game.completed === 1) {
       return "background3";
-    } else if (this.game.completed === 2) {
+    }
+    if (this.game.completed === 2) {
       return "background4";
-    } else if (this.game.completed === 3) {
+    }
+    if (this.game.completed === 3) {
       return "background5";
     }
   }
 
   setBackground() {
-    let backgroundLevel = this.backgroundLevelControl();
-    this.background = this.add.tileSprite(
-      0,
-      0,
-      this.game.config.width,
-      this.game.config.height,
-      backgroundLevel
-    );
-    this.background.setOrigin(0, 0);
+    const backgroundLevel = this.backgroundLevelControl();
+    this.background = create.background(this, backgroundLevel);
   }
 
   powerUpsAnimations() {
@@ -234,9 +257,9 @@ class Space extends Phaser.Scene {
 
   setPowerUps() {
     this.powerUps = this.physics.add.group();
-    var maxObjects = 15;
+    const maxObjects = 15;
     this.powerUpsAnimations();
-    for (var i = 0; i <= maxObjects; i++) {
+    for (let i = 0; i <= maxObjects; i++) {
       this.powerUp = this.physics.add.sprite(16, 16, "power-up");
       this.powerUps.add(this.powerUp);
       this.powerUp.setRandomPosition(
@@ -265,15 +288,6 @@ class Space extends Phaser.Scene {
     );
     this.player.setScale(2);
     this.player.setCollideWorldBounds(true);
-  }
-  firstPlayerState() {
-    this.player.disableBody(true, true);
-    this.time.addEvent({
-      delay: 1000,
-      callback: this.resetPlayer,
-      callbackScope: this,
-      loop: false,
-    });
   }
 
   playerPowerUpsOverlap() {
@@ -309,63 +323,74 @@ class Space extends Phaser.Scene {
   musicLevelControl() {
     if (this.game.completed === 0) {
       return "music_scene2";
-    } else if (this.game.completed === 1) {
+    }
+    if (this.game.completed === 1) {
       return "music_scene3";
-    } else if (this.game.completed === 2) {
+    }
+    if (this.game.completed === 2) {
       return "music_scene4";
-    } else if (this.game.completed === 3) {
+    }
+    if (this.game.completed === 3) {
       return "music_scene5";
     }
   }
+
+  explodeAnimation() {
+    this.anims.create({
+      key: "explode",
+      frames: this.anims.generateFrameNumbers("explosion"),
+      frameRate: 20,
+      repeat: 0,
+      hideOnComplete: true,
+    });
+  }
+
+  beamAnimation() {
+    this.anims.create({
+      key: "beam_anim",
+      frames: this.anims.generateFrameNumbers("beam"),
+      frameRate: 20,
+      repeat: -1,
+    });
+  }
+
   setAudio() {
     this.beamSound = this.sound.add("audio_beam");
     this.explosionSound = this.sound.add("audio_explosion");
     this.pickupSound = this.sound.add("audio_pickup");
     this.ghost = this.sound.add("backRoom");
     this.victory = this.sound.add("victory");
-
-    this.music = this.sound.add(this.musicLevelControl());
-    let volumen = 1;
+    let volume = 1;
     if (this.game.completed === 3) {
-      volumen = 3;
+      volume = 3;
     }
-    this.musicConfig = {
-      mute: false,
+    create.musicConfiguration(this, this.musicLevelControl(), volume);
+  }
 
-      volume: volumen,
-      rate: 1,
-      detune: 0,
-      seek: 0,
-      loop: false,
-      delay: 0,
-    };
-    this.music.play(this.musicConfig);
-  }
-  destroyShip(pointer, gameObject) {
-    gameObject.setTexture("explosion");
-    gameObject.play("explode");
-  }
   shootBeam() {
-    var beam = new Beam(this);
+    const beam = new Beam(this);
     this.beamSound.play();
   }
 
   createScoreLabel() {
-    this.scoreLabel = this.add.bitmapText(10, 5, "pixelFont", "SCORE", 16); // font size de 16
-    this.scoreLabel.text = "SCORE " + this.zeroPad(this.game.score, 6);
+    this.scoreLabel = this.add.bitmapText(10, 5, "pixelFont", "SCORE", 16);
+    this.scoreLabel.text = `SCORE ${this.zeroPad(this.game.score, 6)}`;
   }
+
+  setSpacebar() {
+    return this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+  }
+
   create() {
+    this.explodeAnimation();
+    this.beamAnimation();
     this.lifes = 5;
     this.collect = 15;
-    this.cursorKeys = this.input.keyboard.createCursorKeys();
-    this.spacebar = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.SPACE
-    );
-
+    this.cursorKeys = create.cursors(this);
+    this.spacebar = this.setSpacebar();
     this.setBackground();
     this.setEnemies();
 
-    this.input.on("gameobjectdown", this.destroyShip, this); //pending
     this.setPowerUps();
 
     this.addPlayer();
@@ -373,12 +398,13 @@ class Space extends Phaser.Scene {
 
     this.projectiles = this.add.group();
 
-    this.physics.add.collider(this.projectiles, this.powerUps, function (
-      projectile,
-      powerUp
-    ) {
-      projectile.destroy();
-    });
+    this.physics.add.collider(
+      this.projectiles,
+      this.powerUps,
+      (projectile, powerUp) => {
+        projectile.destroy();
+      }
+    );
 
     this.playerPowerUpsOverlap();
     this.playerEnemiesOverlap();
@@ -407,8 +433,8 @@ class Space extends Phaser.Scene {
       }
     }
 
-    for (var i = 0; i < this.projectiles.getChildren().length; i++) {
-      var beam = this.projectiles.getChildren()[i];
+    for (let i = 0; i < this.projectiles.getChildren().length; i++) {
+      const beam = this.projectiles.getChildren()[i];
       beam.update();
     }
   }

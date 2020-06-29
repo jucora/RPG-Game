@@ -1,3 +1,4 @@
+import create from "./create";
 class Scores extends Phaser.Scene {
   constructor() {
     super("scores");
@@ -60,16 +61,17 @@ class Scores extends Phaser.Scene {
     this.getBetterScores(data);
   }
 
-  create() {
-    this.background = this.add.tileSprite(
-      0,
-      0,
-      this.game.config.width,
-      this.game.config.height,
-      "menu"
-    );
-    this.background.setOrigin(0, 0);
+  backButtonAction() {
+    this.backButton.on("pointerdown", () => {
+      this.game.sound.stopAll();
+      document
+        .querySelector("#tableContainer")
+        .parentNode.removeChild(document.querySelector("#tableContainer"));
+      this.scene.start("menu");
+    });
+  }
 
+  text() {
     this.scoreTitle = this.add.text(
       this.game.config.width / 2,
       50,
@@ -77,22 +79,29 @@ class Scores extends Phaser.Scene {
       { fontSize: 34 }
     );
     this.scoreTitle.setOrigin(0.5, 0);
+  }
 
-    const backtButton = this.add.text(this.game.config.width / 2, 430, "BACK", {
-      fontSize: 24,
-    });
-    backtButton.setOrigin(0.5, 0);
-    backtButton.setInteractive();
-
-    backtButton.on("pointerdown", () => {
+  backButtonAction() {
+    this.backButton.on("pointerdown", () => {
+      let table = document.querySelector("#tableContainer");
+      table.parentNode.removeChild(table);
       this.game.sound.stopAll();
-      document
-        .querySelector("#tableContainer")
-        .parentNode.removeChild(document.querySelector("#tableContainer"));
       this.scene.start("menu");
     });
+  }
 
+  create() {
     this.get();
+    this.background = create.background(this, "menu");
+    this.text();
+    this.backButton = create.button(
+      this,
+      this.game.config.width / 2,
+      430,
+      "BACK",
+      24
+    );
+    this.backButtonAction();
   }
 
   update() {

@@ -1,3 +1,13 @@
+/****************** ABOUT THIS CLASS *******************
+ 
+This scene contains the human player and the 4 portals
+which take the player through the different levels
+of the game.
+
+/*******************************************************/
+
+import create from "./create";
+// eslint-disable-next-line
 class Room extends Phaser.Scene {
   constructor() {
     super("room");
@@ -13,17 +23,6 @@ class Room extends Phaser.Scene {
     this.ball2 = this.physics.add.sprite(700, 100, "ball");
     this.ball3 = this.physics.add.sprite(100, 400, "ball");
     this.ball4 = this.physics.add.sprite(700, 400, "ball");
-  }
-
-  setBackground() {
-    this.background = this.add.tileSprite(
-      0,
-      0,
-      this.game.config.width,
-      this.game.config.height,
-      "background1"
-    );
-    this.background.setOrigin(0, 0);
   }
 
   addPlayer() {
@@ -67,20 +66,6 @@ class Room extends Phaser.Scene {
         this
       );
     }
-  }
-
-  sceneMusic() {
-    this.music = this.sound.add("music_scene1");
-    this.musicConfig = {
-      mute: false,
-      volume: 1,
-      rate: 1,
-      detune: 0,
-      seek: 0,
-      loop: false,
-      delay: 0,
-    };
-    this.music.play(this.musicConfig);
   }
 
   ballAnimations() {
@@ -146,24 +131,6 @@ class Room extends Phaser.Scene {
     });
   }
 
-  explodeAnimation() {
-    this.anims.create({
-      key: "explode",
-      frames: this.anims.generateFrameNumbers("explosion"),
-      frameRate: 20,
-      repeat: 0,
-      hideOnComplete: true,
-    });
-  }
-  beamAnimation() {
-    this.anims.create({
-      key: "beam_anim",
-      frames: this.anims.generateFrameNumbers("beam"),
-      frameRate: 20,
-      repeat: -1,
-    });
-  }
-
   playBallsAnimation() {
     if (this.game.completed === 0) {
       this.ball1.anims.play("ball1", true);
@@ -210,42 +177,18 @@ class Room extends Phaser.Scene {
   }
 
   create() {
-    //ADDING BACKGROUND
-    this.setBackground();
-
-    //ADDING BALLS
+    this.background = create.background(this, "background1");
     this.addBalls();
-
-    //BALLS ANIMATIONS
     this.ballAnimations();
-
-    //ADDING HUMAN
-
     this.addPlayer();
-
-    //HUMAN ANIMATIONS
     this.humanAnimations();
-
-    //HUMAN OVERLAP
     this.overlaps();
-
-    //CURSORS VARIABLE
-    this.cursors = this.input.keyboard.createCursorKeys();
-
-    //SCENE MUSIC
-
-    this.sceneMusic();
-
-    //EXPLODE ANIMATION
-
-    this.explodeAnimation();
-
-    //BEAM ANIMATION
-    this.beamAnimation();
+    this.cursors = create.cursors(this);
+    create.musicConfiguration(this, "music_scene1");
+    this.playBallsAnimation();
   }
 
   update() {
-    this.playBallsAnimation();
     this.PlayerMovementControl();
   }
 }

@@ -1,3 +1,10 @@
+/****************** ABOUT THIS CLASS *******************
+ 
+This is the principal scene of the game, it loads all
+the sprites, images and audio before the game starts
+
+/*******************************************************/
+
 class setGame extends Phaser.Scene {
   constructor() {
     super("setGame");
@@ -89,11 +96,7 @@ class setGame extends Phaser.Scene {
       "../src/assets/sounds/ObservingTheStar.ogg"
     );
     this.load.audio("backRoom", "../src/assets/sounds/ghost.wav");
-    this.load.audio(
-      "music_scene2",
-      "../src/assets/sounds/sci-fi_platformer12.ogg",
-      "../src/assets/sounds/sci-fi_platformer12.mp3"
-    );
+    this.load.audio("music_scene2", "../src/assets/sounds/dimensions.mp3");
     this.load.audio("music_scene3", "../src/assets/sounds/action3.ogg");
     this.load.audio("music_scene4", "../src/assets/sounds/retro.wav");
     this.load.audio("music_scene5", "../src/assets/sounds/ScifiAction.mp3");
@@ -115,15 +118,19 @@ class setGame extends Phaser.Scene {
     );
   }
 
-  preload() {
-    this.loadImages();
-    this.loadSprites();
-    this.loadAudio();
+  loadBitmap() {
     this.load.bitmapFont(
       "pixelFont",
       "../src/assets/font/font.png",
       "../src/assets/font/font.xml"
     );
+  }
+
+  preload() {
+    this.loadImages();
+    this.loadSprites();
+    this.loadAudio();
+    this.loadBitmap();
   }
 
   create() {
