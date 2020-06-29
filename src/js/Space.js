@@ -1,10 +1,10 @@
-import Beam from "./beam";
-import Explosion from "./explosion";
-import create from "./create";
+import Beam from './beam';
+import Explosion from './explosion';
+import create from './create';
 
 class Space extends Phaser.Scene {
   constructor() {
-    super({ key: "space" });
+    super({ key: 'space' });
   }
 
   scoreGraphic() {
@@ -21,20 +21,19 @@ class Space extends Phaser.Scene {
   }
 
   async addScoreToApi() {
-    const url =
-      "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdz/scores/";
+    const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdz/scores/';
     const data = { user: this.game.playerName, score: this.game.score };
 
     fetch(url, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
-      .catch((error) => console.error("Error:", error))
-      .then((response) => console.log("Success:", response));
+      .catch((error) => console.error('Error:', error))
+      .then((response) => console.log('Success:', response));
   }
 
   collectionControl() {
@@ -44,10 +43,10 @@ class Space extends Phaser.Scene {
       if (this.game.completed === 4) {
         this.victory.play();
         this.addScoreToApi();
-        this.scene.start("end");
+        this.scene.start('end');
       } else {
         this.ghost.play();
-        this.scene.start("room");
+        this.scene.start('room');
       }
     }
   }
@@ -67,7 +66,7 @@ class Space extends Phaser.Scene {
     const tween = this.tweens.add({
       targets: this.player,
       y: this.game.config.height - 64,
-      ease: "Power1",
+      ease: 'Power1',
       duration: 1500,
       repeat: false,
       onComplete() {
@@ -88,7 +87,7 @@ class Space extends Phaser.Scene {
       this.game.score = 0;
       this.music.pause(this.musicConfig);
       this.ghost.play();
-      this.scene.start("room");
+      this.scene.start('room');
     }
   }
 
@@ -153,16 +152,16 @@ class Space extends Phaser.Scene {
 
   enemiesSpriteControl() {
     if (this.game.completed === 0) {
-      return this.physics.add.sprite(16, 16, "green_virus");
+      return this.physics.add.sprite(16, 16, 'green_virus');
     }
     if (this.game.completed === 1) {
-      return this.physics.add.sprite(16, 16, "pink_virus");
+      return this.physics.add.sprite(16, 16, 'pink_virus');
     }
     if (this.game.completed === 2) {
-      return this.physics.add.sprite(16, 16, "red_virus");
+      return this.physics.add.sprite(16, 16, 'red_virus');
     }
     if (this.game.completed === 3) {
-      return this.physics.add.sprite(16, 16, "pink_virus");
+      return this.physics.add.sprite(16, 16, 'pink_virus');
     }
   }
 
@@ -208,11 +207,11 @@ class Space extends Phaser.Scene {
         0,
         0,
         this.game.config.width,
-        this.game.config.height
+        this.game.config.height,
       );
       this.virus.setVelocity(
         this.virusVelocityControl()[0],
-        this.virusVelocityControl()[1]
+        this.virusVelocityControl()[1],
       );
       this.virus.setCollideWorldBounds(true);
       this.virus.setBounce(1);
@@ -221,16 +220,16 @@ class Space extends Phaser.Scene {
 
   backgroundLevelControl() {
     if (this.game.completed === 0) {
-      return "background2";
+      return 'background2';
     }
     if (this.game.completed === 1) {
-      return "background3";
+      return 'background3';
     }
     if (this.game.completed === 2) {
-      return "background4";
+      return 'background4';
     }
     if (this.game.completed === 3) {
-      return "background5";
+      return 'background5';
     }
   }
 
@@ -241,15 +240,15 @@ class Space extends Phaser.Scene {
 
   powerUpsAnimations() {
     this.anims.create({
-      key: "red",
-      frames: this.anims.generateFrameNumbers("power-up", { start: 0, end: 1 }),
+      key: 'red',
+      frames: this.anims.generateFrameNumbers('power-up', { start: 0, end: 1 }),
       frameRate: 20,
       repeat: -1,
     });
 
     this.anims.create({
-      key: "gray",
-      frames: this.anims.generateFrameNumbers("power-up", { start: 2, end: 3 }),
+      key: 'gray',
+      frames: this.anims.generateFrameNumbers('power-up', { start: 2, end: 3 }),
       frameRate: 20,
       repeat: -1,
     });
@@ -260,18 +259,18 @@ class Space extends Phaser.Scene {
     const maxObjects = 15;
     this.powerUpsAnimations();
     for (let i = 0; i <= maxObjects; i++) {
-      this.powerUp = this.physics.add.sprite(16, 16, "power-up");
+      this.powerUp = this.physics.add.sprite(16, 16, 'power-up');
       this.powerUps.add(this.powerUp);
       this.powerUp.setRandomPosition(
         0,
         0,
         this.game.config.width,
-        this.game.config.height
+        this.game.config.height,
       );
       if (Math.random() > 0.5) {
-        this.powerUp.play("red");
+        this.powerUp.play('red');
       } else {
-        this.powerUp.play("gray");
+        this.powerUp.play('gray');
       }
 
       this.powerUp.setVelocity(100, 100);
@@ -284,7 +283,7 @@ class Space extends Phaser.Scene {
     this.player = this.physics.add.sprite(
       this.game.config.width / 2 - 8,
       this.game.config.height - 64,
-      "ship"
+      'ship',
     );
     this.player.setScale(2);
     this.player.setCollideWorldBounds(true);
@@ -296,7 +295,7 @@ class Space extends Phaser.Scene {
       this.powerUps,
       this.pickPowerUp,
       null,
-      this
+      this,
     );
   }
 
@@ -306,7 +305,7 @@ class Space extends Phaser.Scene {
       this.enemies,
       this.hurtPlayer,
       null,
-      this
+      this,
     );
   }
 
@@ -316,29 +315,29 @@ class Space extends Phaser.Scene {
       this.enemies,
       this.hitEnemy,
       null,
-      this
+      this,
     );
   }
 
   musicLevelControl() {
     if (this.game.completed === 0) {
-      return "music_scene2";
+      return 'music_scene2';
     }
     if (this.game.completed === 1) {
-      return "music_scene3";
+      return 'music_scene3';
     }
     if (this.game.completed === 2) {
-      return "music_scene4";
+      return 'music_scene4';
     }
     if (this.game.completed === 3) {
-      return "music_scene5";
+      return 'music_scene5';
     }
   }
 
   explodeAnimation() {
     this.anims.create({
-      key: "explode",
-      frames: this.anims.generateFrameNumbers("explosion"),
+      key: 'explode',
+      frames: this.anims.generateFrameNumbers('explosion'),
       frameRate: 20,
       repeat: 0,
       hideOnComplete: true,
@@ -347,19 +346,19 @@ class Space extends Phaser.Scene {
 
   beamAnimation() {
     this.anims.create({
-      key: "beam_anim",
-      frames: this.anims.generateFrameNumbers("beam"),
+      key: 'beam_anim',
+      frames: this.anims.generateFrameNumbers('beam'),
       frameRate: 20,
       repeat: -1,
     });
   }
 
   setAudio() {
-    this.beamSound = this.sound.add("audio_beam");
-    this.explosionSound = this.sound.add("audio_explosion");
-    this.pickupSound = this.sound.add("audio_pickup");
-    this.ghost = this.sound.add("backRoom");
-    this.victory = this.sound.add("victory");
+    this.beamSound = this.sound.add('audio_beam');
+    this.explosionSound = this.sound.add('audio_explosion');
+    this.pickupSound = this.sound.add('audio_pickup');
+    this.ghost = this.sound.add('backRoom');
+    this.victory = this.sound.add('victory');
     let volume = 1;
     if (this.game.completed === 3) {
       volume = 3;
@@ -373,7 +372,7 @@ class Space extends Phaser.Scene {
   }
 
   createScoreLabel() {
-    this.scoreLabel = this.add.bitmapText(10, 5, "pixelFont", "SCORE", 16);
+    this.scoreLabel = this.add.bitmapText(10, 5, 'pixelFont', 'SCORE', 16);
     this.scoreLabel.text = `SCORE ${this.zeroPad(this.game.score, 6)}`;
   }
 
@@ -403,7 +402,7 @@ class Space extends Phaser.Scene {
       this.powerUps,
       (projectile, powerUp) => {
         projectile.destroy();
-      }
+      },
     );
 
     this.playerPowerUpsOverlap();
@@ -413,8 +412,8 @@ class Space extends Phaser.Scene {
     this.setAudio();
 
     this.anims.create({
-      key: "thrust",
-      frames: this.anims.generateFrameNumbers("ship"),
+      key: 'thrust',
+      frames: this.anims.generateFrameNumbers('ship'),
       frameRate: 20,
       repeat: -1,
     });
@@ -423,7 +422,7 @@ class Space extends Phaser.Scene {
   }
 
   update() {
-    this.player.anims.play("thrust", true);
+    this.player.anims.play('thrust', true);
 
     this.background.tilePositionY -= 2.5;
     this.movePlayerManager();

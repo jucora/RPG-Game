@@ -1,50 +1,51 @@
-import create from "./create";
+import create from './create';
 
 class Menu extends Phaser.Scene {
   constructor() {
-    super("menu");
+    super('menu');
   }
 
   startButtonAction() {
-    this.startButton.on("pointerdown", () => {
-      this.scene.start("getName");
+    this.startButton.on('pointerdown', () => {
+      this.scene.start('getName');
     });
   }
 
   instructionsButtonAction() {
-    this.instructionsButton.on("pointerdown", () => {
-      this.scene.start("instructions");
+    this.instructionsButton.on('pointerdown', () => {
+      this.scene.start('instructions');
     });
   }
 
   scoreButtonAction() {
-    this.scoresButton.on("pointerdown", () => {
-      this.scene.start("scores");
+    this.scoresButton.on('pointerdown', () => {
+      this.scene.start('scores');
     });
   }
+
   creditsButtonAction() {
-    this.creditsButton.on("pointerdown", () => {
-      this.scene.start("credits");
+    this.creditsButton.on('pointerdown', () => {
+      this.scene.start('credits');
     });
   }
 
   create() {
-    this.background = create.background(this, "menu");
-    create.musicConfiguration(this, "music_menu");
+    this.background = create.background(this, 'menu');
+    create.musicConfiguration(this, 'music_menu');
     this.text = create.text(
       this,
       this.game.config.width / 2,
       100,
-      "KILLING COVID 19",
-      34
+      'KILLING COVID 19',
+      34,
     );
 
     this.startButton = create.button(
       this,
       this.game.config.width / 2,
       200,
-      "START",
-      24
+      'START',
+      24,
     );
     this.startButtonAction();
 
@@ -52,8 +53,8 @@ class Menu extends Phaser.Scene {
       this,
       this.game.config.width / 2,
       250,
-      "HOW TO PLAY",
-      24
+      'HOW TO PLAY',
+      24,
     );
     this.instructionsButtonAction();
 
@@ -61,8 +62,8 @@ class Menu extends Phaser.Scene {
       this,
       this.game.config.width / 2,
       300,
-      "SCORES",
-      24
+      'SCORES',
+      24,
     );
     this.scoreButtonAction();
 
@@ -70,8 +71,8 @@ class Menu extends Phaser.Scene {
       this,
       this.game.config.width / 2,
       350,
-      "CREDITS",
-      24
+      'CREDITS',
+      24,
     );
     this.creditsButtonAction();
   }

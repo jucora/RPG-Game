@@ -1,5 +1,5 @@
-/****************** ABOUT THIS MODULE *********************
- 
+/** **************** ABOUT THIS MODULE *********************
+
 This module includes methods that are called by different
 scenes, methods such as create a text, create a background,
 create buttons, create cursors and set music configuration.
@@ -7,22 +7,22 @@ create buttons, create cursors and set music configuration.
 The idea of this module is to avoid repeating code and make
 it easier to read and maintain
 
-/*********************************************************/
+/******************************************************** */
 
 const create = (() => {
   const text = (scene, titlePosX, titlePosY, text, fontSize) => {
     scene.creditsTitle = scene.add.text(titlePosX, titlePosY, text, {
-      fontSize: fontSize,
+      fontSize,
     });
     scene.creditsTitle.setOrigin(0.5, 0);
   };
   const background = (scene, sceneBackground) => {
-    let background = scene.add.tileSprite(
+    const background = scene.add.tileSprite(
       0,
       0,
       scene.game.config.width,
       scene.game.config.height,
-      sceneBackground
+      sceneBackground,
     );
     background.setOrigin(0, 0);
     return background;
@@ -43,7 +43,7 @@ const create = (() => {
   };
 
   const button = (scene, buttonPosX, buttonPosY, buttonText, textSize) => {
-    let button = scene.add.text(buttonPosX, buttonPosY, buttonText, {
+    const button = scene.add.text(buttonPosX, buttonPosY, buttonText, {
       fontSize: textSize,
     });
     button.setOrigin(0.5, 0);
@@ -51,9 +51,7 @@ const create = (() => {
     return button;
   };
 
-  const cursors = (scene) => {
-    return scene.input.keyboard.createCursorKeys();
-  };
+  const cursors = (scene) => scene.input.keyboard.createCursorKeys();
   return {
     text,
     background,

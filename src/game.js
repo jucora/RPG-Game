@@ -1,16 +1,17 @@
-import Menu from "./js/menu";
-import Instructions from "./js/Instructions";
-import setGame from "./js/setGame";
-import getName from "./js/getName";
-import Room from "./js/Room";
-import Space from "./js/Space";
-import Scores from "./js/Scores";
-import End from "./js/End";
-import Credits from "./js/Credits";
+import Phaser from 'phaser';
+import Menu from './js/menu';
+import Instructions from './js/Instructions';
+import setGame from './js/setGame';
+import getName from './js/getName';
+import Room from './js/Room';
+import Space from './js/Space';
+import Scores from './js/Scores';
+import End from './js/End';
+import Credits from './js/Credits';
 
-import "./css/style.css";
+import './css/style.css';
 
-var config = {
+const config = {
   width: 800,
   height: 480,
   backgroundColor: 0x000000,
@@ -27,11 +28,11 @@ var config = {
   ],
   pixelArt: true,
   physics: {
-    default: "arcade",
+    default: 'arcade',
     arcade: {
       debug: false,
     },
   },
 };
 
-let game = new Phaser.Game(config);
+const game = new Phaser.Game(config);
