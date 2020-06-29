@@ -20,7 +20,9 @@ class Scores extends Phaser.Scene {
   backButtonAction() {
     this.backButton.on('pointerdown', () => {
       const table = document.querySelector('#tableContainer');
-      table.parentNode.removeChild(table);
+      if (table) {
+        table.parentNode.removeChild(table);
+      }
       this.game.sound.stopAll();
       this.scene.start('menu');
     });

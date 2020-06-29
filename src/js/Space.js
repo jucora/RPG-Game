@@ -61,7 +61,7 @@ class Space extends Phaser.Scene {
   }
 
   resetPlayer() {
-    const x = this.game.config.width / 2 - 8;
+    const x = (this.game.config.width / 2) - 8;
     const y = this.game.config.height + 64;
     this.player.enableBody(true, x, y, true, true);
     this.player.alpha = 0.5;
@@ -290,7 +290,7 @@ class Space extends Phaser.Scene {
 
   addPlayer() {
     this.player = this.physics.add.sprite(
-      this.game.config.width / 2 - 8,
+      (this.game.config.width / 2) - 8,
       this.game.config.height - 64,
       'ship',
     );
