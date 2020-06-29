@@ -4,6 +4,7 @@ This scene is where the player can see the instructions
 to play the game.
 
 /****************************************************** */
+/* eslint-disable-next-line import/no-unresolved */
 import Phaser from 'phaser';
 import create from './create';
 
