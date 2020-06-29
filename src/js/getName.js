@@ -14,15 +14,6 @@ class GetName extends Phaser.Scene {
     super('getName');
   }
 
-  inputNameField() {
-    const div = document.createElement('div');
-    div.setAttribute('id', 'playerNameBox');
-    const input = document.createElement('input');
-    input.setAttribute('id', 'playerName');
-    div.appendChild(input);
-    document.body.appendChild(div);
-  }
-
   start(input) {
     this.game.playerName = input.value;
     this.game.score = 0;
@@ -41,16 +32,6 @@ class GetName extends Phaser.Scene {
     }
   }
 
-  backButtonAction() {
-    backtButton.on('pointerdown', () => {
-      this.game.sound.stopAll();
-      document
-        .querySelector('#playerNameBox')
-        .parentNode.removeChild(document.querySelector('#playerNameBox'));
-      this.scene.start('menu');
-    });
-  }
-
   text() {
     this.titleName = this.add.text(400, 150, 'Your Name', {
       fontSize: 24,
@@ -61,9 +42,9 @@ class GetName extends Phaser.Scene {
   backButtonAction() {
     this.backbutton.on('pointerdown', () => {
       this.game.sound.stopAll();
-      this.scene.start('menu');
       const inputName = document.querySelector('#playerNameBox');
       inputName.parentNode.removeChild(inputName);
+      this.scene.start('menu');
     });
   }
 
@@ -76,7 +57,7 @@ class GetName extends Phaser.Scene {
   create() {
     this.background = create.background(this, 'menu');
     this.text();
-    this.inputNameField();
+    create.inputNameField();
     this.playButton = create.button(
       this,
       this.game.config.width / 2,

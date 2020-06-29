@@ -6,6 +6,7 @@ music and audio effects.
 
 /****************************************************** */
 
+import Phaser from 'phaser';
 import create from './create';
 
 class Credits extends Phaser.Scene {

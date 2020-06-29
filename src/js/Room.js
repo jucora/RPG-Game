@@ -5,9 +5,9 @@ which take the player through the different levels
 of the game.
 
 /****************************************************** */
-
+import Phaser from 'phaser';
 import create from './create';
-// eslint-disable-next-line
+
 class Room extends Phaser.Scene {
   constructor() {
     super('room');

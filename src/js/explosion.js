@@ -5,13 +5,12 @@ explosion when the player gets hurt or when an enemy
 is killed.
 
 /****************************************************** */
+import Phaser from 'phaser';
 
-// eslint-disable-next-line
 class Explosion extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, 'explosion');
     scene.add.existing(this);
-    this.play('explode');
   }
 }
 

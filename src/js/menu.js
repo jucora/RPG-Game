@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import create from './create';
 
 class Menu extends Phaser.Scene {

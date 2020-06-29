@@ -4,10 +4,9 @@ This scene displays the end of the game and the final
 score made by the player.
 
 /****************************************************** */
-
+import Phaser from 'phaser';
 import create from './create';
 
-// eslint-disable-next-line
 class End extends Phaser.Scene {
   constructor() {
     super('end');

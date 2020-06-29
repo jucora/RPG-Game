@@ -4,7 +4,7 @@ This scene is where the player can see the instructions
 to play the game.
 
 /****************************************************** */
-
+import Phaser from 'phaser';
 import create from './create';
 
 class Instructions extends Phaser.Scene {

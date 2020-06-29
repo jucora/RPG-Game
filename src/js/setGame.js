@@ -5,6 +5,8 @@ the sprites, images and audio before the game starts
 
 /****************************************************** */
 
+import Phaser from 'phaser';
+
 class setGame extends Phaser.Scene {
   constructor() {
     super('setGame');

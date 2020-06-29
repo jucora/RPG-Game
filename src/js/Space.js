@@ -1,5 +1,7 @@
-import Beam from './beam';
-import Explosion from './explosion';
+/* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+import Phaser from 'phaser';
+import Beam from './Beam';
+import Explosion from './Explosion';
 import create from './create';
 
 class Space extends Phaser.Scene {
@@ -33,7 +35,7 @@ class Space extends Phaser.Scene {
     })
       .then((res) => res.json())
       .catch((error) => console.error('Error:', error))
-      .then((response) => console.log('Success:', response));
+      .then((response) => console.warn('Success:', response));
   }
 
   collectionControl() {
@@ -63,7 +65,7 @@ class Space extends Phaser.Scene {
     const y = this.game.config.height + 64;
     this.player.enableBody(true, x, y, true, true);
     this.player.alpha = 0.5;
-    const tween = this.tweens.add({
+    this.tweens.add({
       targets: this.player,
       y: this.game.config.height - 64,
       ease: 'Power1',
@@ -106,7 +108,8 @@ class Space extends Phaser.Scene {
     if (this.player.alpha < 1) {
       return;
     }
-    new Explosion(this, player.x, player.y);
+    const explosion = new Explosion(this, player.x, player.y);
+    explosion.play('explode');
     this.explosionSound.play();
     this.firstPlayerState();
     this.lifes -= 1;
@@ -114,11 +117,11 @@ class Space extends Phaser.Scene {
   }
 
   zeroPad(number, size) {
-    let stringNumber = String(number);
-    while (stringNumber.length < (size || 2)) {
-      stringNumber = `0${stringNumber}`;
+    this.stringNumber = String(number);
+    while (this.stringNumber.length < (size || 2)) {
+      this.stringNumber = `0${this.stringNumber}`;
     }
-    return stringNumber;
+    return this.stringNumber;
   }
 
   incrementScore() {
@@ -127,7 +130,8 @@ class Space extends Phaser.Scene {
   }
 
   hitEnemy(projectile, enemy) {
-    new Explosion(this, enemy.x, enemy.y);
+    const explosion = new Explosion(this, enemy.x, enemy.y);
+    explosion.play('explode');
     projectile.destroy();
     this.resetShipPos(enemy);
     this.incrementScore();
@@ -148,6 +152,7 @@ class Space extends Phaser.Scene {
     if (this.game.completed === 3) {
       return 4;
     }
+    return -1;
   }
 
   enemiesSpriteControl() {
@@ -163,6 +168,7 @@ class Space extends Phaser.Scene {
     if (this.game.completed === 3) {
       return this.physics.add.sprite(16, 16, 'pink_virus');
     }
+    return false;
   }
 
   enemiesScaleControl() {
@@ -178,6 +184,7 @@ class Space extends Phaser.Scene {
     if (this.game.completed === 3) {
       return 1;
     }
+    return false;
   }
 
   virusVelocityControl() {
@@ -193,15 +200,16 @@ class Space extends Phaser.Scene {
     if (this.game.completed === 3) {
       return [300, 300];
     }
+    return false;
   }
 
   setEnemies() {
     this.enemies = this.physics.add.group();
     this.maxVirus = this.amountEnemies();
-    for (let i = 0; i <= this.maxVirus; i++) {
+    for (let i = 0; i <= this.maxVirus; i += 1) {
       this.virus = this.enemiesSpriteControl();
       this.virus.setScale(this.enemiesScaleControl());
-      this.virusScale;
+
       this.enemies.add(this.virus);
       this.virus.setRandomPosition(
         0,
@@ -231,6 +239,7 @@ class Space extends Phaser.Scene {
     if (this.game.completed === 3) {
       return 'background5';
     }
+    return false;
   }
 
   setBackground() {
@@ -258,7 +267,7 @@ class Space extends Phaser.Scene {
     this.powerUps = this.physics.add.group();
     const maxObjects = 15;
     this.powerUpsAnimations();
-    for (let i = 0; i <= maxObjects; i++) {
+    for (let i = 0; i <= maxObjects; i += 1) {
       this.powerUp = this.physics.add.sprite(16, 16, 'power-up');
       this.powerUps.add(this.powerUp);
       this.powerUp.setRandomPosition(
@@ -332,6 +341,7 @@ class Space extends Phaser.Scene {
     if (this.game.completed === 3) {
       return 'music_scene5';
     }
+    return false;
   }
 
   explodeAnimation() {
@@ -368,6 +378,8 @@ class Space extends Phaser.Scene {
 
   shootBeam() {
     const beam = new Beam(this);
+    beam.play('beam_anim');
+    beam.body.velocity.y = -250;
     this.beamSound.play();
   }
 
@@ -380,6 +392,13 @@ class Space extends Phaser.Scene {
     return this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   }
 
+  projectilePowerUpCollider() {
+    this.projectiles = this.add.group();
+    this.physics.add.collider(this.projectiles, this.powerUps, (projectile) => {
+      projectile.destroy();
+    });
+  }
+
   create() {
     this.explodeAnimation();
     this.beamAnimation();
@@ -389,21 +408,10 @@ class Space extends Phaser.Scene {
     this.spacebar = this.setSpacebar();
     this.setBackground();
     this.setEnemies();
-
     this.setPowerUps();
-
     this.addPlayer();
     this.firstPlayerState();
-
-    this.projectiles = this.add.group();
-
-    this.physics.add.collider(
-      this.projectiles,
-      this.powerUps,
-      (projectile, powerUp) => {
-        projectile.destroy();
-      },
-    );
+    this.projectilePowerUpCollider();
 
     this.playerPowerUpsOverlap();
     this.playerEnemiesOverlap();
@@ -432,7 +440,7 @@ class Space extends Phaser.Scene {
       }
     }
 
-    for (let i = 0; i < this.projectiles.getChildren().length; i++) {
+    for (let i = 0; i < this.projectiles.getChildren().length; i += 1) {
       const beam = this.projectiles.getChildren()[i];
       beam.update();
     }

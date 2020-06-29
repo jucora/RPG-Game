@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Menu from './js/menu';
+import Menu from './js/Menu';
 import Instructions from './js/Instructions';
 import setGame from './js/setGame';
 import getName from './js/getName';
@@ -36,3 +36,5 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+
+export default game;
