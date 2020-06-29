@@ -23,6 +23,7 @@ canvas {
   height: auto;
   width: 50%;
 }
+
 table {
   width: 100%;
 }
@@ -30,6 +31,7 @@ table {
 th {
   height: 50px;
 }
+
 #playerNameBox {
   display: flex;
   justify-content: center;
