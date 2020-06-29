@@ -5,6 +5,7 @@ explosion when the player gets hurt or when an enemy
 is killed.
 
 /****************************************************** */
+/* eslint-disable-next-line import/no-unresolved */
 import Phaser from 'phaser';
 
 class Explosion extends Phaser.GameObjects.Sprite {

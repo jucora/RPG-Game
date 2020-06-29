@@ -5,6 +5,7 @@ which take the player through the different levels
 of the game.
 
 /****************************************************** */
+/* eslint-disable-next-line import/no-unresolved */
 import Phaser from 'phaser';
 import create from './create';
 

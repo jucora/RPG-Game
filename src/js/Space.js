@@ -1,4 +1,5 @@
 /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+/* eslint-disable-next-line import/no-unresolved */
 import Phaser from 'phaser';
 import Beam from './Beam';
 import Explosion from './Explosion';

@@ -4,7 +4,7 @@ This is the principal scene of the game, it loads all
 the sprites, images and audio before the game starts
 
 /****************************************************** */
-
+/* eslint-disable-next-line import/no-unresolved */
 import Phaser from 'phaser';
 
 class setGame extends Phaser.Scene {

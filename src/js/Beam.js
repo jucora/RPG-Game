@@ -4,7 +4,7 @@ This scene contains the functionality to create a new
 shot when the user press the spacebar
 
 /****************************************************** */
-
+/* eslint-disable-next-line import/no-unresolved */
 import Phaser from 'phaser';
 
 class Beam extends Phaser.GameObjects.Sprite {
