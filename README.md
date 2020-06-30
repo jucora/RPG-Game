@@ -44,11 +44,13 @@ For more information about the project requirements, please follow the next link
 
  <p><code> git clone https://github.com/jucora/RPG-Game.git </code></p>
 
-2. Run the command npm install to install all dependencies for the project
+2. Run the next command to install all dependencies for the project: <p><code>npm install</code></p> 
 
-3. Next, follow the route: RPG-Game/dist
+3. To run the game you will need a local server such as XAMPP. Other option could be to use an extension like <b>Live Server</b> provided by some code editors like Visual Studio Code.
 
-You'll find the index.html file, open it and you're good to go!
+4. Next, follow the route: RPG-Game/dist.
+
+5. You'll find a file called index.html, open it and you're good to go!
 
 ## :computer: Languages, frameworks and technologies
 
