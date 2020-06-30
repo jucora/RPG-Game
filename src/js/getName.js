@@ -6,7 +6,7 @@ start the game.
 
 /****************************************************** */
 
-import create from './create';
+import name from './getNameHelper';
 
 // eslint-disable-next-line
 class GetName extends Phaser.Scene {
@@ -22,16 +22,6 @@ class GetName extends Phaser.Scene {
     this.game.sound.stopAll();
     this.scene.start('room');
   }
-
-  nameValidation() {
-    const input = document.querySelector('#playerName');
-    if (!input.value.trim().length) {
-      input.style.background = 'red';
-    } else {
-      this.start(input);
-    }
-  }
-
   text() {
     this.titleName = this.add.text(400, 150, 'Your Name', {
       fontSize: 24,
@@ -50,14 +40,16 @@ class GetName extends Phaser.Scene {
 
   playButtonAction() {
     this.playButton.on('pointerdown', () => {
-      this.nameValidation();
+      if (name.validation()) {
+        this.start(input);
+      }
     });
   }
 
   create() {
     this.background = create.background(this, 'menu');
     this.text();
-    create.inputNameField();
+    name.inputNameField();
     this.playButton = create.button(
       this,
       this.game.config.width / 2,

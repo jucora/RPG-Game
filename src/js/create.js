@@ -51,14 +51,6 @@ const create = (() => {
     return button;
   };
 
-  const inputNameField = () => {
-    const div = document.createElement('div');
-    div.setAttribute('id', 'playerNameBox');
-    const input = document.createElement('input');
-    input.setAttribute('id', 'playerName');
-    div.appendChild(input);
-    document.body.appendChild(div);
-  };
 
   const cursors = (scene) => scene.input.keyboard.createCursorKeys();
   return {
@@ -67,7 +59,6 @@ const create = (() => {
     musicConfiguration,
     cursors,
     button,
-    inputNameField,
   };
 })();
 

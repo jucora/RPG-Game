@@ -7,17 +7,6 @@ class Scores extends Phaser.Scene {
   constructor() {
     super('scores');
   }
-
-  text() {
-    this.scoreTitle = this.add.text(
-      this.game.config.width / 2,
-      50,
-      'Leader Board',
-      { fontSize: 34 },
-    );
-    this.scoreTitle.setOrigin(0.5, 0);
-  }
-
   backButtonAction() {
     this.backButton.on('pointerdown', () => {
       const table = document.querySelector('#tableContainer');
@@ -32,7 +21,13 @@ class Scores extends Phaser.Scene {
   create() {
     getLeaderBoard();
     this.background = create.background(this, 'menu');
-    this.text();
+    create.text(
+      this,
+      this.game.config.width / 2,
+      50,
+      'Leader Board',
+      34 ,
+    );
     this.backButton = create.button(
       this,
       this.game.config.width / 2,
