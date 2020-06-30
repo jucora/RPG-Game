@@ -1,7 +1,8 @@
 import name from '../src/js/getNameHelper'
-import testSimulator from './testHelper'
+import simulator from './testHelper'
 
-let input = testSimulator.inputNameField()
+let input = simulator.inputNameField()
+
 
 
 describe('name', () => {
@@ -32,6 +33,7 @@ describe('name', () => {
             expect(document.querySelector('#playerNameBox')).toBeTruthy()
         })
         it('should create an input to set player name', () => {
+
             expect(document.querySelector('#playerName')).toBeTruthy()
         })
     })

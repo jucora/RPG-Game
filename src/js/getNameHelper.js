@@ -8,6 +8,12 @@ const name = (() => {
         }
 
     }
+    const inputNameValue = () => {
+        return document.querySelector('#playerName')
+    }
+    const nameInputContainer = () => {
+        return document.querySelector('#playerNameBox')
+    }
     const inputNameField = () => {
         const div = document.createElement('div');
         div.setAttribute('id', 'playerNameBox');
@@ -17,6 +23,8 @@ const name = (() => {
         document.body.appendChild(div);
     };
     return {
+        inputNameValue,
+        nameInputContainer,
         inputNameField, validation
     }
 })()

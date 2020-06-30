@@ -1,11 +1,15 @@
 /* eslint-disable-next-line import/no-unresolved */
 import Phaser from 'phaser';
 import create from './create';
-import getLeaderBoard from './scoresHelper';
+import score from './scoresHelper';
 
 class Scores extends Phaser.Scene {
   constructor() {
     super('scores');
+  }
+
+  init() {
+    score.getLeaderBoard();
   }
   backButtonAction() {
     this.backButton.on('pointerdown', () => {
@@ -19,7 +23,6 @@ class Scores extends Phaser.Scene {
   }
 
   create() {
-    getLeaderBoard();
     this.background = create.background(this, 'menu');
     create.text(
       this,

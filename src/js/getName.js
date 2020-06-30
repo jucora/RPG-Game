@@ -7,6 +7,7 @@ start the game.
 /****************************************************** */
 
 import name from './getNameHelper';
+import create from './create'
 
 // eslint-disable-next-line
 class GetName extends Phaser.Scene {
@@ -32,7 +33,7 @@ class GetName extends Phaser.Scene {
   backButtonAction() {
     this.backbutton.on('pointerdown', () => {
       this.game.sound.stopAll();
-      const inputName = document.querySelector('#playerNameBox');
+      const inputName = name.nameInputContainer();
       inputName.parentNode.removeChild(inputName);
       this.scene.start('menu');
     });
@@ -41,7 +42,7 @@ class GetName extends Phaser.Scene {
   playButtonAction() {
     this.playButton.on('pointerdown', () => {
       if (name.validation()) {
-        this.start(input);
+        this.start(name.inputNameValue());
       }
     });
   }
