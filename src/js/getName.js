@@ -7,7 +7,7 @@ start the game.
 /****************************************************** */
 
 import name from './getNameHelper';
-import create from './create'
+import create from './create';
 
 // eslint-disable-next-line
 class GetName extends Phaser.Scene {
@@ -23,6 +23,7 @@ class GetName extends Phaser.Scene {
     this.game.sound.stopAll();
     this.scene.start('room');
   }
+
   text() {
     this.titleName = this.add.text(400, 150, 'Your Name', {
       fontSize: 24,

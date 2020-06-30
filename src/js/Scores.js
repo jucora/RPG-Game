@@ -8,9 +8,6 @@ class Scores extends Phaser.Scene {
     super('scores');
   }
 
-  init() {
-    score.getLeaderBoard();
-  }
   backButtonAction() {
     this.backButton.on('pointerdown', () => {
       const table = document.querySelector('#tableContainer');
@@ -23,14 +20,9 @@ class Scores extends Phaser.Scene {
   }
 
   create() {
+    score.getLeaderBoard();
     this.background = create.background(this, 'menu');
-    create.text(
-      this,
-      this.game.config.width / 2,
-      50,
-      'Leader Board',
-      34 ,
-    );
+    create.text(this, this.game.config.width / 2, 50, 'Leader Board', 34);
     this.backButton = create.button(
       this,
       this.game.config.width / 2,

@@ -57,11 +57,8 @@ const score = (() => {
   }
 
   return {
-    getLeaderBoard
-  }
-})()
+    getLeaderBoard,
+  };
+})();
 
-export default score
-
-
-
+export default score;
