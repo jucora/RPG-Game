@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "webpack --mode development",
-    "produccion": "webpack -p",
+    "production": "webpack -p",
     "watch": "webpack --w --mode development",
     "test": "jest"
   },
