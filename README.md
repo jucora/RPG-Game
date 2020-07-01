@@ -22,7 +22,7 @@ For more information about the project requirements, please follow the next link
 
 ## :point_right: How the game was design and developed
 
-- The first step was to learn the framework Phaser, read the documentation, make some practices to get familiar with it and study the main functionalities offered by this tool. For more information about this framework, please click in the next link:[Phaser](http://phaser.io/) 
+- The first step was to learn the framework Phaser, read the documentation, make some practices to get familiar with it and study the main functionalities offered by this tool. For more information about this framework, please click in the next link:[Phaser](http://phaser.io/)
 
 - The second step was to really understand what RPG means and try to see some examples and get some ideas. This was the most fundamental part. I spent some time reading about video games story.
 
@@ -30,9 +30,9 @@ For more information about the project requirements, please follow the next link
 
 - When the idea was conceived, a story is generated, with the idea to place the player in a game context. A goal is established, and also the task to make a relation between each game element with the application of programming concepts in javascript was made.
 
-- Having the main idea of the game, the story, and the whole tasks in mind, I proceed to search for resources for the video game, such as sprites, sounds, background images, animations, documentation with code examples and all necessary resources to make the video game. 
+- Having the main idea of the game, the story, and the whole tasks in mind, I proceed to search for resources for the video game, such as sprites, sounds, background images, animations, documentation with code examples and all necessary resources to make the video game.
 
- <b>Important:</b> It is important to mention that the resources used for this video game are freely distributed in order to protect and respect copyright.
+<b>Important:</b> It is important to mention that the resources used for this video game are freely distributed in order to protect and respect copyright.
 
 - Then the video game creation process began and at this point of development the ideas were implemented, and over time some of them were also discarded and new ones emerged.
 
@@ -44,13 +44,59 @@ For more information about the project requirements, please follow the next link
 
  <p><code> git clone https://github.com/jucora/RPG-Game.git </code></p>
 
-2. Run the next command to install all dependencies for the project: <p><code>npm install</code></p> 
+2. Run the next command to install all dependencies for the project: <p><code>npm install</code></p>
 
 3. To run the game you will need a local server such as XAMPP. Other option could be to use an extension like <b>Live Server</b> provided by some code editors like Visual Studio Code.
 
 4. Next, follow the route: RPG-Game/dist.
 
 5. You'll find a file called index.html, open it and you're good to go!
+
+## :point_right: How to play the game
+
+1. MENU SCENE: The first scene you'will see is the main menu, you can see several options.
+
+- The first option is START, when you click you will be asked to type your name to start the game:
+
+ <p align="center">
+  <img src ='preview/name.gif' alt='User typing name'>
+</p>
+
+- The second option in the menu is HOW TO PLAY instructions, please read the before you start playing:
+
+<p align="center">
+  <img src ='preview/how.gif' alt='How to play instructions'>
+</p>
+
+- The third option in the menu is SCORES, here you can see the leaderboard, a board that containes the best scores even from you or other players:
+
+<p align="center">
+  <img src ='preview/scores.gif' alt='How to play instructions'>
+</p>
+
+2. ROOM SCENE: in this scene you will see a human character and 4 portals, move the character with the arrows of your keyboard and go to the current opened portal. The current portal available is the one that changes color. Each portal represents a level in the game:
+
+<p align="center">
+  <img src ='preview/move1.gif' alt='How to play instructions'>
+</p>
+
+3. SPACE SCENE: this is the scene you'll start playing, move the spaceship with the arrows of your keyboard:
+
+<p align="center">
+  <img src ='preview/move2.gif' alt='How to play instructions'>
+</p>
+
+To kill the enemies press the spacebar of your keyboard. You'll see that the spaceship starts shooting:
+
+<p align="center">
+  <img src ='preview/shot.gif' alt='How to play instructions'>
+</p>
+
+4. END SCENE: once you get the 4 portals completed, you will see a maessage and your final score:
+
+<p align="center">
+  <img src ='preview/end.gif' alt='How to play instructions'>
+</p>
 
 ## :computer: Languages, frameworks and technologies
 
@@ -74,9 +120,9 @@ For more information about the project requirements, please follow the next link
 
 - Alexandr Zhelanov: DEmo_3, SkyPortal
 
-- Ogrebane: Ghost sound 
+- Ogrebane: Ghost sound
 
-- Cynicmusic:  Heavy_ConceptB
+- Cynicmusic: Heavy_ConceptB
 
 - yd: ObservingTheStar
 
