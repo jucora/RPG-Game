@@ -56,28 +56,28 @@ For more information about the project requirements, please follow the next link
 
 1. MENU SCENE: The first scene you'will see is the main menu, you can see several options.
 
-- The first option is START, when you click you will be asked to type your name to start the game:
+- The first option is START, when you click in there, you will be asked to type your name to start the game:
 
  <p align="center">
   <img src ='preview/name.gif' alt='User typing name'>
 </p>
 
-- The second option in the menu is HOW TO PLAY instructions, please read the before you start playing:
+- The second option in the menu is HOW TO PLAY instructions, please read them before you start playing:
 
 <p align="center">
   <img src ='preview/how.gif' alt='How to play instructions'>
 </p>
 
-- The third option in the menu is SCORES, here you can see the leaderboard, a board that containes the best scores even from you or other players:
+- The third option in the menu is SCORES, here you can see the leaderboard, a board that contains the best scores even from you or other players:
 
 <p align="center">
   <img src ='preview/scores.gif' alt='How to play instructions'>
 </p>
 
-2. ROOM SCENE: in this scene you will see a human character and 4 portals, move the character with the arrows of your keyboard and go to the current opened portal. The current portal available is the one that changes color. Each portal represents a level in the game:
+2. ROOM SCENE: in this scene you will see a human character and 4 portals, move the character with the arrows of your keyboard and go to the current opened portal. The current portal available is the one that is animated and changes color. Each portal represents a level in the game:
 
 <p align="center">
-  <img src ='preview/move1.gif' alt='How to play instructions'>
+  <img src ='preview/move.gif' alt='How to play instructions'>
 </p>
 
 3. SPACE SCENE: this is the scene you'll start playing, move the spaceship with the arrows of your keyboard:
@@ -92,7 +92,7 @@ To kill the enemies press the spacebar of your keyboard. You'll see that the spa
   <img src ='preview/shot.gif' alt='How to play instructions'>
 </p>
 
-4. END SCENE: once you get the 4 portals completed, you will see a maessage and your final score:
+4. END SCENE: once you get the 4 portals completed, you will see a message and your final score:
 
 <p align="center">
   <img src ='preview/end.gif' alt='How to play instructions'>
