@@ -4,7 +4,7 @@
   <img src ='preview/preview.gif' alt='Preview of the game'>
 </p>
 
-# :globe_with_meridians: [Live Version Link](https://raw.githack.com/jucora/RPG-Game/Version1/dist/index.html):point_left:
+# :globe_with_meridians: [Live Version Link](https://raw.githack.com/jucora/RPG-Game/master/dist/index.html):point_left:
 
 ## Author
 
