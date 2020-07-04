@@ -1,0 +1,46 @@
+body {
+  background: #000;
+  position: relative;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  margin-top: 55px;
+}
+
+#tableContainer {
+  background: #000;
+  color: #fff;
+  padding: 20px;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  height: auto;
+  width: 50%;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  height: 50px;
+}
+
+#playerNameBox {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 180px;
+  left: 38%;
+}
+
+#playerName {
+  padding: 10px;
+  width: 300px;
+}
