@@ -40,17 +40,18 @@ For more information about the project requirements, please follow the next link
 
 ## :point_right: How to run the game in a local environment
 
-1. You can clone the repo by running the next command in your command line:
+1. <b>IMPORTANT:</b> To run the game you will need a local server such as XAMPP. Another option could be to use an extension like Live Server provided by some code editors like Visual Studio Code.
 
- <p><code> git clone https://github.com/jucora/RPG-Game.git </code></p>
+2. You can clone the repo by running the next command in your command line:<p><code> git clone https://github.com/jucora/RPG-Game.git </code></p>
 
-2. Run the next command to install all dependencies for the project: <p><code>npm install</code></p>
+3. Next, go into the project's folder by running the next command: <p><code>cd RPG-Game</code></p>
 
-3. To run the game you will need a local server such as XAMPP. Another option could be to use an extension like <b>Live Server</b> provided by some code editors like Visual Studio Code.
+4. Run the next command to install all dependencies for the project: <p><code>npm install</code></p>
 
-4. Next, follow the route: RPG-Game/dist.
+5. Next, go into the dist folder by running the next command: <p><code>cd dist</code></p>
 
-5. You'll find a file called index.html, open it and you're good to go!
+6. Your local server will provide you an HTTP URL with a port assigned, in this example the URL is http://127.0.0.1:5500 but yours could be with a different port so please make sure you have the correct URL. Based on the example, then run the command: <p><code>open http://127.0.0.1:5500/dist/index.html</code></p>
+
 
 ## :point_right: How to play the game
 
@@ -131,3 +132,11 @@ To kill the enemies, press the spacebar of your keyboard. You'll see that the sp
 - Bogart VGM: Scifi Action
 
 - Matthew Pablo: n-Dimensions.
+
+## Report Issues
+
+Please feel free to contribute, report any issue, feature request or provide any feedback. Click [here](https://github.com/jucora/RPG-Game/issues)
+
+## Support
+
+Feel free to give a :star:. That would support me a lot.
